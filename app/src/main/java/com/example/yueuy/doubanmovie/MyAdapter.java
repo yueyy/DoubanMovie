@@ -4,9 +4,11 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,9 +19,13 @@ import java.util.Map;
 public class MyAdapter extends BaseAdapter {
     private Context mContext;
     private List<Map<String,String>> list;
+    private LayoutInflater mInflater;
+
     public MyAdapter(Context context, List<Map<String, String>> list){
+        mInflater = LayoutInflater.from(context);
         this.mContext = context;
         this.list = list;
+
     }
 
     @Override
@@ -41,7 +47,7 @@ public class MyAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent){
         ViewHolder holder;
         if (convertView == null){
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.list, parent
+            convertView = mInflater.inflate(R.layout.list, parent
             ,false);
             holder = new ViewHolder();
             holder.title = convertView.findViewById(R.id.title);

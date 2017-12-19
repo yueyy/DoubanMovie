@@ -29,20 +29,20 @@ public class Douban {
         }catch (JSONException e){
             e.printStackTrace();
         }
+
         JSONObject jsonObject = new JSONObject(data);
         int total = jsonObject.getInt("total");
 
         List<Map<String, String>> list = new ArrayList<Map<String, String>>();
-        Map<String, String> map = null;
+        Map<String, String> map = new HashMap<String,String>();
         JSONArray array = jsonObject.getJSONArray("subjects");
-        for (int i = 1; i < array.length(); i++) {
+        for (int i = 0; i < array.length(); i++) {
             JSONObject arrayJSONObject = array.getJSONObject(i);
             String title = arrayJSONObject.getString("title");
-            int rating = arrayJSONObject.optInt("rating");
+            String rating = arrayJSONObject.optString("rating");
             int collect_count = arrayJSONObject.optInt("collect_count");
             String directors = arrayJSONObject.optString("directors");
             String casts = arrayJSONObject.optString("casts");
-            map = new HashMap<String, String>();
             map.put("title",title);
             map.put("rating",rating+"");
             map.put("collect_count",collect_count+"");
@@ -53,27 +53,27 @@ public class Douban {
         return list;
     }
 
-    public void sendRequest(String path) throws Exception{
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    URL url = new URL(PATH);
-                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.setRequestMethod("GET");
-                    connection.setConnectTimeout(5000);
-                    int code = connection.getResponseCode();
-                    if (code ==200){
-                        InputStream inputStream = connection.getInputStream();
-                        byte[] data = readStream(inputStream);
-                        String json = new String(data);
-                        JSONAnalysis(json);
-                    }
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
+    public List<Map<String,String>> get(String path){
+        HttpURLConnection connection = null;
+        List<Map<String,String >> result = new ArrayList<>();
+        try{
+            URL url = new URL(path);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setConnectTimeout(5000);
+            connection.setReadTimeout(10000);
+
+            int responseCode = connection.getResponseCode();
+            if (responseCode == 200){
+                InputStream inputStream = connection.getInputStream();
+                byte[] data = readStream(inputStream);
+                String json = new String(data);
+                result =  JSONAnalysis(json);
             }
-        }).start();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
     }
 
     private static byte[] readStream(InputStream inputStream) throws Exception {
