@@ -22,6 +22,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -31,50 +32,47 @@ import java.util.Map;
 
 public class Douban {
     private static final String TAG = "DoubanMovie";
-    private static final String PATH = "https://api.douban.com/v2/movie/top250";
+
     public List<Map<String ,String>> result = new ArrayList<>();
-    public Map<String, String> map = new HashMap<String, String>();
 
     public List<Map<String,String >> JSONAnalysis(String data)throws Exception{
-        JSONObject object = null;
         try{
-            object = new JSONObject(data);
+            JSONObject object = new JSONObject(data);
         }catch (JSONException e){
             e.printStackTrace();
         }
 
-        JSONObject jsonObject = new JSONObject(data);
-        List<Map<String, String>> list = new ArrayList<Map<String, String>>();
-        Map<String, String> map = new HashMap<String,String>();
-        JSONArray array = jsonObject.getJSONArray("subjects");
-
+        JSONObject obj = new JSONObject(data);
+        JSONArray array = obj.getJSONArray("subjects");
         for (int i = 0; i < array.length(); i++) {
-            JSONObject arrayJSONObject = array.getJSONObject(i);
-            String title = arrayJSONObject.getString("title");
-            int collect_count = arrayJSONObject.optInt("collect_count");
+            Map<String, String> map = new HashMap<String, String>();
+            JSONObject objMovies = array.getJSONObject(i);
+            String title = objMovies.getString("title");
+            int collect_count = objMovies.getInt("collect_count");
+            JSONObject objRating = objMovies.getJSONObject("rating");
+            String rating = objRating.getString("average");
 
-            JSONObject objRating = arrayJSONObject.getJSONObject("rating");
-            String rating = objRating.optString("average");
+//            JSONArray arrDirectors = objMovies.getJSONArray("directors");
+//            for (int j = 0; j <arrDirectors.length(); j++) {
+//                JSONObject objDir = arrDirectors.getJSONObject(i);
+//                String directors = objDir.getString("name");
+//                map.put("directors",directors);
+//            }
+//
+//            JSONArray arrCasts = objMovies.getJSONArray("casts");
+//            for (int j = 0; j <arrCasts.length() ; j++) {
+//                JSONObject objCasts = arrCasts.getJSONObject(i);
+//                String casts = objCasts.getString("name");
+//                map.put("casts",casts);
+//            }
+
             map.put("title",title);
             map.put("rating",rating+"");
             map.put("collect_count",collect_count+"");
+            result.add(map);
 
-            JSONArray dirArray = arrayJSONObject.getJSONArray("directors");
-            for (int j = 0; j <=250; j++) {
-                JSONObject objDir = dirArray.getJSONObject(i);
-                String directors = objDir.optString("name");
-                map.put("directors",directors);
-            }
-
-            JSONArray castsArray = arrayJSONObject.getJSONArray("casts");
-            for (int j = 0; j <=250 ; j++) {
-                JSONObject objCasts = castsArray.getJSONObject(i);
-                String casts = objCasts.optString("name");
-                map.put("casts", casts);
-            }
-            list.add(map);
         }
-        return list;
+        return result;
     }
 
     public List<Map<String,String>> get(String path) {
@@ -99,12 +97,6 @@ public class Douban {
         }
         return result;
     }
-
-//    private List<Movies> fromToJson(String json){
-//        Type type = new TypeToken<List<Movies>>(){}.getType();
-//        Gson gson = new Gson();
-//        return gson.fromJson(json,type);
-//    }
 
     private static byte[] readStream(InputStream inputStream) throws Exception {
         ByteArrayOutputStream bout = new ByteArrayOutputStream();

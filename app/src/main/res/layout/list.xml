@@ -9,7 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="26sp"
-        android:textColor="@color/colorText"/>
+        android:textColor="@color/colorText"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
     
     <TextView
         android:id="@+id/rating"
@@ -17,26 +19,33 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/title"
         android:textSize="18sp"
-        android:textColor="@color/colorText"/>
+        android:textColor="@color/colorText"
+        android:layout_marginStart="16dp"
+        />
     <TextView
         android:id="@+id/collect_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/title"
-        android:layout_toEndOf="@+id/rating"
-        android:textColor="@color/colorText"/>
+        android:layout_marginEnd="16dp"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/colorText"
+        />
     <TextView
         android:id="@+id/director"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rating"
         android:textColor="@color/colorText"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         />
     <TextView
         android:id="@+id/casts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rating"
-        android:layout_toEndOf="@+id/director"
-        android:textColor="@color/colorText"/>
+        android:layout_below="@+id/director"
+        android:textColor="@color/colorText"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
 </RelativeLayout>

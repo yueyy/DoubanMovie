@@ -3,16 +3,11 @@ package com.example.yueuy.doubanmovie;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,9 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText edtSearch;
     private ListView mListView;
     private List<Map<String ,String >> mList;
-//    private MyAdapter mMyAdapter;
     private static final String TAG = "DoubanMovie";
-    private static final String PATH = "https://api.douban.com/v2/movie/top250";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
