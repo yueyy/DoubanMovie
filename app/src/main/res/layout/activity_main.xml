@@ -6,12 +6,16 @@
     android:layout_height="match_parent"
     tools:context="com.example.yueuy.doubanmovie.MainActivity">
 
-    <EditText
-        android:id="@+id/edt_movie_name"
+    <SearchView
+        android:id="@+id/search_movies"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:iconifiedByDefault="false"
+        android:queryHint="@string/search_title"
         />
 
     <Button
@@ -21,7 +25,7 @@
         android:text="@string/btn_search"
         android:textAllCaps="false"
         android:layout_gravity="center"
-        android:layout_below="@+id/edt_movie_name"
+        android:layout_below="@+id/search_movies"
         android:layout_centerHorizontal="true"/>
 
     <ListView

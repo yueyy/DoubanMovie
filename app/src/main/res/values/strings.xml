@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">DoubanMovie</string>
     <string name="btn_search">Search</string>
+    <string name="search_title">Input the title of movies</string>
 </resources>

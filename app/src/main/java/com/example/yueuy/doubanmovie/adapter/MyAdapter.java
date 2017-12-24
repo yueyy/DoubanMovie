@@ -1,16 +1,17 @@
-package com.example.yueuy.doubanmovie;
+package com.example.yueuy.doubanmovie.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.example.yueuy.doubanmovie.R;
+import com.example.yueuy.doubanmovie.bean.Movies;
+import com.example.yueuy.doubanmovie.bean.Subjects;
+
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by yueuy on 17-12-18.
@@ -18,10 +19,10 @@ import java.util.Map;
 
 public class MyAdapter extends BaseAdapter {
     private Context mContext;
-    private List<Map<String,String>> list;
+    private List<Subjects> list;
     private LayoutInflater mInflater;
 
-    public MyAdapter(Context context, List<Map<String, String>> list){
+    public MyAdapter(Context context, List<Subjects> list){
         mInflater = LayoutInflater.from(context);
         this.mContext = context;
         this.list = list;
@@ -60,11 +61,10 @@ public class MyAdapter extends BaseAdapter {
         }else{
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.title.setText(list.get(position).get("title"));
-        holder.rating.setText(list.get(position).get("rating"));
-        holder.collect_count.setText(list.get(position).get("collect_count"));
-        holder.director.setText(list.get(position).get("directors"));
-        holder.casts.setText(list.get(position).get("casts"));
+        holder.title.setText(list.get(position).getTitle());
+        holder.rating.setText(list.get(position).getRating());
+        holder.collect_count.setText(list.get(position).getCollect_count());
+//        holder.director.setText(list.get(position).getDirectorses());
         return convertView;
     }
 
