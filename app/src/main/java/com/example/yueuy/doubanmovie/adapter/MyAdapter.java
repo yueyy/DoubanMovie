@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.yueuy.doubanmovie.R;
+import com.example.yueuy.doubanmovie.bean.Casts;
+import com.example.yueuy.doubanmovie.bean.Directors;
 import com.example.yueuy.doubanmovie.bean.Movies;
 import com.example.yueuy.doubanmovie.bean.Subjects;
 
@@ -63,8 +65,9 @@ public class MyAdapter extends BaseAdapter {
         }
         holder.title.setText(list.get(position).getTitle());
         holder.rating.setText(list.get(position).getRating());
-        holder.collect_count.setText(list.get(position).getCollect_count());
-//        holder.director.setText(list.get(position).getDirectorses());
+        holder.collect_count.setText(""+list.get(position).getCollect_count());
+//        holder.director.setText();
+//        holder.casts.setText();
         return convertView;
     }
 

@@ -1,5 +1,6 @@
 package com.example.yueuy.doubanmovie.bean;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -9,8 +10,8 @@ import java.util.List;
 public class Subjects {
     private String title;
     private String rating;
-    private List<Subjects.Casts> mCastses;
-    private List<Subjects.Directors> mDirectorses;
+    private List<Casts> mCasts;
+    private List<Directors> mDirectors;
     private int collect_count;
 
     public String getTitle() {
@@ -29,20 +30,20 @@ public class Subjects {
         this.rating = rating;
     }
 
-    public List<Subjects.Casts> getCastses() {
-        return mCastses;
+    public List<Casts> getCasts() {
+        return mCasts;
     }
 
-    public void setCastses(List<Subjects.Casts> castses) {
-        mCastses = castses;
+    public void setCastses(List<Casts> castses) {
+        mCasts = castses;
     }
 
-    public List<Subjects.Directors> getDirectorses() {
-        return mDirectorses;
+    public List<Directors> getDirectors() {
+        return mDirectors;
     }
 
-    public void setDirectorses(List<Subjects.Directors> directorses) {
-        mDirectorses = directorses;
+    public void setDirectors(List<Directors> directors) {
+        mDirectors = directors;
     }
 
     public int getCollect_count() {
@@ -51,43 +52,6 @@ public class Subjects {
 
     public void setCollect_count(int collect_count) {
         this.collect_count = collect_count;
-    }
-
-    public class Rating{
-        private int average;
-
-        public int getAverage() {
-            return average;
-        }
-
-        public void setAverage(int average) {
-            this.average = average;
-        }
-    }
-
-    public class Casts {
-
-        private String name;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-    }
-
-    public class Directors {
-        private String name;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
     }
 
 }

@@ -1,5 +1,7 @@
 package com.example.yueuy.doubanmovie;
 
+import com.example.yueuy.doubanmovie.bean.Casts;
+import com.example.yueuy.doubanmovie.bean.Directors;
 import com.example.yueuy.doubanmovie.bean.Movies;
 import com.example.yueuy.doubanmovie.bean.Subjects;
 
@@ -13,9 +15,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by yueuy on 17-12-17.
@@ -28,44 +28,47 @@ public class Douban {
 
     public List<Subjects> JSONAnalysis(String data)throws Exception{
         try{
-            JSONObject object = new JSONObject(data);
+            JSONObject obj = new JSONObject(data);
+            JSONArray array = obj.getJSONArray("subjects");
+            for (int i = 0; i < array.length(); i++) {
+                Subjects subjects = new Subjects();
+                JSONObject objMovies = array.getJSONObject(i);
+                String title = objMovies.getString("title");
+                int collect_count = objMovies.getInt("collect_count");
+                JSONObject objRating = objMovies.getJSONObject("rating");
+                String rating = objRating.getString("average");
+
+                subjects.setTitle(title);
+                subjects.setRating(rating);
+                subjects.setCollect_count(collect_count);
+
+//                JSONArray arrDirectors = objMovies.getJSONArray("directors");
+//                List<Directors> d = new ArrayList<>();
+//                for (int j = 0; j < arrDirectors.length(); j++) {
+//                    Directors directors = new Directors();
+//                    JSONObject objDir = arrDirectors.getJSONObject(i);
+//                    String director = objDir.getString("name");
+//                    directors.setName(director);
+//                    d.add(directors);
+//                }
+//                subjects.setDirectors(d);
+
+//                JSONArray arrCasts = objMovies.getJSONArray("casts");
+//                for (int j = 0; j <arrCasts.length() ; j++) {
+////                    List<Casts> casts = new ArrayList<>();
+////                    Casts c = new Casts();
+//                    JSONObject objCasts = arrCasts.getJSONObject(i);
+//                    String cast = objCasts.getString("name");
+////                    c.setName(cast);
+////                    casts.set(i,c);
+//                    subjects.setCastses(cast);
+//                }
+                result.add(subjects);
+            }
         }catch (JSONException e){
             e.printStackTrace();
         }
 
-        JSONObject obj = new JSONObject(data);
-        JSONArray array = obj.getJSONArray("subjects");
-        for (int i = 0; i < array.length(); i++) {
-            Subjects subjects = new Subjects();
-            JSONObject objMovies = array.getJSONObject(i);
-            String title = objMovies.getString("title");
-            int collect_count = objMovies.getInt("collect_count");
-            JSONObject objRating = objMovies.getJSONObject("rating");
-            String rating = objRating.getString("average");
-
-            subjects.setTitle(title);
-            subjects.setRating(rating);
-            subjects.setCollect_count(collect_count);
-
-            result.add(subjects);
-//            JSONArray arrDirectors = objMovies.getJSONArray("directors");
-//            for (int j = 0; j <arrDirectors.length(); j++) {
-//                JSONObject objDir = arrDirectors.getJSONObject(i);
-//                String directors = objDir.getString("name");
-//
-//            }
-//
-//            JSONArray arrCasts = objMovies.getJSONArray("casts");
-//            for (int j = 0; j <arrCasts.length() ; j++) {
-//                JSONObject objCasts = arrCasts.getJSONObject(i);
-//                String casts = objCasts.getString("name");
-////                map.put("casts",casts);
-//            }
-
-//            mSubjects.setTitle(title);
-//            mSubjects.setCollect_count(collect_count);
-
-        }
         return result;
     }
 
