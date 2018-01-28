@@ -46,7 +46,7 @@ public class Douban {
 //                List<Directors> d = new ArrayList<>();
 //                for (int j = 0; j < arrDirectors.length(); j++) {
 //                    Directors directors = new Directors();
-//                    JSONObject objDir = arrDirectors.getJSONObject(i);
+//                    JSONObject objDir = arrDirectors.getJSONObject(j);
 //                    String director = objDir.getString("name");
 //                    directors.setName(director);
 //                    d.add(directors);
@@ -57,7 +57,7 @@ public class Douban {
 //                for (int j = 0; j <arrCasts.length() ; j++) {
 ////                    List<Casts> casts = new ArrayList<>();
 ////                    Casts c = new Casts();
-//                    JSONObject objCasts = arrCasts.getJSONObject(i);
+//                    JSONObject objCasts = arrCasts.getJSONObject(j);
 //                    String cast = objCasts.getString("name");
 ////                    c.setName(cast);
 ////                    casts.set(i,c);
